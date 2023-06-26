@@ -1,28 +1,28 @@
 const initialState = {
   users: [
     {
-      id: 1,
+      id: 0,
       name: "Артем Иванов",
       email: "artfem@gmail.com",
       permissions: "Блог, Аналитика",
       image: "https://gorodprizrak.com/wp-content/uploads/2021/01/346545.jpg",
     },
     {
-      id: 2,
+      id: 1,
       name: "Лена Новикова",
       email: "lenkfan@gmail.com",
       permissions: "Администратор",
       image: "https://gorodprizrak.com/wp-content/uploads/2021/01/346545.jpg",
     },
     {
-      id: 3,
+      id: 2,
       name: "Айжулдыз Кошкинбай",
       email: "aizhzk@gmail.com",
       permissions: "Обращение, клиентов",
       image: "https://gorodprizrak.com/wp-content/uploads/2021/01/346545.jpg",
     },
     {
-      id: 4,
+      id: 3,
       name: "Лена Новикова",
       email: "lenkan@gmail.com",
       permissions: "Администратор",

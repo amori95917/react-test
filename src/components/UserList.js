@@ -1,15 +1,19 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { deleteUser, updateUser } from "../actions/userActions";
+import { deleteUser, updateUser, searchUser } from "../actions/userActions";
 import { input, modal, button } from "bootstrap";
 import "./styles.css";
 
 const UserList = ({ users }) => {
+  {
+    console.log("userList users", users);
+  }
+
   const [selectedUser, setSelectedUser] = useState({});
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [permissions, setPermissions] = useState("");
-
+  const [searchUserEmail, setSearchUserEmail] = useState("");
   useEffect(() => {}, [users]);
 
   useEffect(() => {
@@ -20,6 +24,11 @@ const UserList = ({ users }) => {
 
   const handleDeleteUser = (userId) => {
     dispatch(deleteUser(userId));
+  };
+
+  const handleSearchUser = (userEmail) => {
+    console.log("e.target.value", userEmail);
+    setSearchUserEmail(userEmail);
   };
 
   const dispatch = useDispatch();
@@ -51,9 +60,23 @@ const UserList = ({ users }) => {
     dispatch(updateUser(updatedUser));
   };
 
+  // const toggleClick = (sidebar) => {
+  //   sidebar.style.display = "block";
+  // };
+
+  function toggleSidebar() {
+    const sidebar = document.getElementById("sidebar");
+    if (sidebar !== null) {
+      if (sidebar.style.display === "none") {
+        sidebar.style.display = "block";
+      } else {
+        sidebar.style.display = "none";
+      }
+    }
+  }
   return (
     <div className="main-body">
-      <div className="sidebar ">
+      <div id="sidebar" className="sidebar">
         <ul className="menu">
           <li>
             <img
@@ -173,23 +196,31 @@ const UserList = ({ users }) => {
         <div className="header">
           <div className="mobileHeader">
             <img
-              className="toggle-menu-icon"
+              id="toggleMenuIcon"
+              className="toggleMenuIcon"
               src={process.env.PUBLIC_URL + "/menu2.png"}
               alt="Иконка"
+              onClick={toggleSidebar}
             />
             <h1 className="title">Команда</h1>
           </div>
 
-          <div className="input-container ">
+          <div className="input-container">
             <input
               type="text"
               className="form-control"
               placeholder="Поиск по Email"
+              onChange={(e) => handleSearchUser(e.target.value)}
             />
 
             <img
               className="fa fa-user icon"
-              style={{ marginRight: "0.5em", width: "1em", height: "1em" }}
+              style={{
+                cursor: "pointer",
+                marginRight: "0.5em",
+                width: "1em",
+                height: "1em",
+              }}
               src={process.env.PUBLIC_URL + "/Vector.png"}
               alt="Иконка"
             />
@@ -214,61 +245,66 @@ const UserList = ({ users }) => {
             style={{ width: "100%" }}
           >
             <tbody>
-              {users.map((user) => (
-                <tr key={user.id}>
-                  <td className="user-imgTd">
-                    <img
-                      className="user-imgs"
-                      src={user.image}
-                      alt={user.name}
-                    />
-                  </td>
-                  <td className="user-permTd">
-                    <div className="user-name-email">
-                      <strong className="user-name">{user.name}</strong>
-                      &nbsp;&nbsp;&nbsp;
-                      <h className="user-email"> {user.email}</h>
-                    </div>
-                    <br />
-                    {user.permissions.split(",").map((permission) => (
-                      <div className="border border-secondary-subtle">
-                        {permission}
-                      </div>
-                    ))}
-                  </td>
-                  <td className="dropdownIcon">
-                    <div className="dropdown">
-                      <button className="dropbtn">
-                        <img src={process.env.PUBLIC_URL + "/Group.png"} />
-                      </button>
-                      <div className="dropdown-content">
-                        <button
-                          className="buttons"
-                          onClick={() => handleDeleteUser(user.id)}
-                        >
-                          <img
-                            className="dropbtns"
-                            src={process.env.PUBLIC_URL + "/trash.png"}
-                          />
-                        </button>
+              {users.map((user) => {
+                if (user.email === searchUserEmail || searchUserEmail === "")
+                  return (
+                    <tr key={user.id}>
+                      <td className="user-imgTd">
+                        <img
+                          className="user-imgs"
+                          src={user.image}
+                          alt={user.name}
+                        />
+                      </td>
+                      <td className="user-permTd">
+                        <div className="user-name-email">
+                          <strong className="user-name">{user.name}</strong>
+                          &nbsp;&nbsp;&nbsp;
+                          <h className="user-email"> {user.email}</h>
+                        </div>
+                        <br />
 
-                        <button
-                          type="button"
-                          data-bs-toggle="modal"
-                          data-bs-target="#editModal"
-                          className="buttons btnedit"
-                          onClick={() => currentUser(user.id)}
-                        >
-                          <img
-                            className="dropbtns"
-                            src={process.env.PUBLIC_URL + "/edit.png"}
-                          />
-                        </button>
-                      </div>
-                    </div>
-                  </td>
-                </tr>
-              ))}
+                        {user.permissions.split(",").map((permission) => (
+                          <div className="border border-secondary-subtle">
+                            {permission}
+                          </div>
+                        ))}
+                      </td>
+                      <td className="dropdownIcon">
+                        <div className="dropdown">
+                          <button className="dropbtn">
+                            <img src={process.env.PUBLIC_URL + "/Group.png"} />
+                          </button>
+                          <div className="dropdown-content">
+                            <button
+                              className="buttons"
+                              onClick={() => handleDeleteUser(user.id)}
+                            >
+                              <img
+                                className="dropbtns"
+                                src={process.env.PUBLIC_URL + "/trash.png"}
+                              />
+                            </button>
+
+                            <button
+                              type="button"
+                              data-bs-toggle="modal"
+                              data-bs-target="#editModal"
+                              className="buttons btnedit"
+                              onClick={() => currentUser(user.id)}
+                            >
+                              <img
+                                className="dropbtns"
+                                src={process.env.PUBLIC_URL + "/edit.png"}
+                              />
+                            </button>
+                          </div>
+                        </div>
+                      </td>
+                    </tr>
+                  );
+                else return <></>;
+              })}
             </tbody>
           </table>
           <div className="modal fade " id="editModal">
