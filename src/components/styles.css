@@ -2,7 +2,6 @@
   .sidebar {
     border-radius: 0 20px 0 0;
     padding-top: 20px;
-    position: fixed;
     top: 0;
     left: 0;
     width: 100% !important;
@@ -18,17 +17,14 @@
     display: block !important;
     opacity: 1 !important;
   }
-
   .menu-text {
     margin-left: 1em;
     color: #424f5e;
     display: block !important;
   }
-  .descrip {
-    opacity: 0;
-  }
 
   .descrip {
+    display: inline-block;
     opacity: 1 !important;
     transition: opacity 1s ease-in-out;
   }
@@ -38,12 +34,6 @@
     justify-content: left;
     padding-left: 1.5em;
     cursor: pointer;
-  }
-
-  .col-1,
-  .col-2,
-  .col-8 {
-    display: none;
   }
 
   .header {
@@ -88,9 +78,7 @@
   .menu-icon {
     display: inline-block;
   }
-  .descrip {
-    display: inline-block;
-  }
+
   .mobileHeader {
     display: flex;
     align-items: center;
@@ -99,17 +87,14 @@
   .btn-close {
     max-width: 10px !important;
   }
-  .toggleMenuIcon:hover h1 {
-    display: none !important;
-  }
-  .sidebar {
-    display: none;
-  }
 }
 
 @media (min-width: 770px) {
   .toggleMenuIcon {
     display: none;
+  }
+  .sidebar {
+    display: block;
   }
 }
 
@@ -238,14 +223,14 @@ td {
 .sidebar {
   border-radius: 0 20px 0 0;
   padding-top: 20px;
-  position: fixed;
+  position: absolute;
   top: 0;
   left: 0;
   width: 100px;
-  height: 200vh;
+  height: 100vh;
   background-color: #ffffff;
   transition: width 1s;
-  overflow: hidden;
+  overflow: auto;
   box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
 }
 
@@ -321,17 +306,16 @@ p {
 }
 
 .dropbtn {
-  color: rgb(50, 192, 118);
   height: 2em;
   width: 2em;
   font-size: 16px;
   border: none;
   cursor: pointer;
   border-radius: 5px;
+  background-color: white;
 }
 
 .dropbtns {
-  color: rgb(50, 192, 118);
   height: 20px;
   width: 20px;
   font-size: 16px;
@@ -370,7 +354,7 @@ p {
 }
 
 .dropdown:hover .dropbtn {
-  background-color: #818181;
+  background-color: #efeff6;
 }
 
 .title {
@@ -382,4 +366,60 @@ p {
   display: flex;
   align-items: center;
   justify-content: space-between;
+}
+.deleteModal {
+  display: grid;
+  justify-content: center;
+  top: 20em;
+}
+
+.editModalBody {
+  padding: 2.5em !important;
+}
+
+.modal-content {
+  border-radius: 20px !important;
+}
+
+.deleteModalContent {
+  width: 26em !important;
+  height: 10em !important;
+  border-radius: 20px !important;
+}
+
+.deleteModalBody {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.deleteSucBtn {
+  border-radius: 12px !important;
+  height: 3em !important;
+  margin: 0 !important;
+  margin-top: 0.5em !important;
+  background-color: rgb(50, 192, 118) !important;
+}
+
+.deleteNote {
+  color: #424f5e;
+}
+
+.dropdown-content {
+  border-radius: 10px;
+}
+
+.editSaveBtn {
+  border-radius: 12px !important;
+  height: 3em !important;
+  margin: 0 !important;
+  width: 100%;
+  max-width: unset !important;
+  border: none !important;
+  background-color: rgb(50, 192, 118) !important;
+}
+
+.editForms {
+  margin-bottom: 0.5em;
 }

@@ -60,10 +60,6 @@ const UserList = ({ users }) => {
     dispatch(updateUser(updatedUser));
   };
 
-  // const toggleClick = (sidebar) => {
-  //   sidebar.style.display = "block";
-  // };
-
   function toggleSidebar() {
     const sidebar = document.getElementById("sidebar");
     if (sidebar !== null) {
@@ -238,12 +234,7 @@ const UserList = ({ users }) => {
 
         <br />
         <div className="tableContainer">
-          <table
-            hover
-            table
-            className="table table-hover"
-            style={{ width: "100%" }}
-          >
+          <table className="table table-hover" style={{ width: "100%" }}>
             <tbody>
               {users.map((user) => {
                 if (user.email === searchUserEmail || searchUserEmail === "")
@@ -277,7 +268,9 @@ const UserList = ({ users }) => {
                           </button>
                           <div className="dropdown-content">
                             <button
-                              className="buttons"
+                              data-bs-toggle="modal"
+                              data-bs-target="#deleteModal"
+                              className="buttons btndelete"
                               onClick={() => handleDeleteUser(user.id)}
                             >
                               <img
@@ -307,51 +300,72 @@ const UserList = ({ users }) => {
               })}
             </tbody>
           </table>
-          <div className="modal fade " id="editModal">
-            <div class="modal-dialog">
-              <div class="modal-content">
-                <div class="modal-header">
-                  <div class="modal-body">
-                    <h4>Редактирование</h4>
-                    <br />
-                    <img className="selectPhoto" src={selectedUser.image} />
-                    <br />
-                    <br />
-                    <strong>Имя:</strong>
-                    <input
-                      className="form-control"
-                      type="text"
-                      id="name"
-                      value={name}
-                      onChange={(e) => setName(e.target.value)}
-                    />
-                    <strong>Почта:</strong>
-                    <input
-                      className="form-control"
-                      type="tel"
-                      id="email"
-                      value={email}
-                      onChange={(e) => setEmail(e.target.value)}
-                    />
-                    <strong>Разрешения:</strong>
-                    <input
-                      className="form-control"
-                      type="tel"
-                      id="permissions"
-                      value={permissions}
-                      onChange={(e) => setPermissions(e.target.value)}
-                    />
 
-                    <div className="modal-actions">
-                      <br />
-                      <button
-                        className="btn btn-success"
-                        onClick={handleEditUser}
-                        data-bs-dismiss="modal"
-                      >
-                        Save
-                      </button>
-                    </div>
+          {/* {isUserDeleted && ( */}
+          <div className="modal fade" id="deleteModal">
+            <div className="modal-dialog deleteModal modal-sm">
+              <div className="modal-content deleteModalContent">
+                <div className="modal-body deleteModalBody">
+                  <h6 className="deleteNote">
+                    <strong>Пользователь успешно удален</strong>
+                  </h6>
+                  <button
+                    type="button"
+                    className="btn btn-primary deleteSucBtn"
+                    data-bs-dismiss="modal"
+                  >
+                    Закрыть
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* )} */}
+
+          <div className="modal fade " id="editModal">
+            <div className="modal-dialog">
+              <div className="modal-content">
+                <div className="modal-body editModalBody">
+                  <h4>Редактирование</h4>
+                  <br />
+                  <img className="selectPhoto" src={selectedUser.image} />
+                  <br />
+                  <br />
+                  <strong>Имя:</strong>
+                  <input
+                    className="form-control editForms"
+                    type="text"
+                    id="name"
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
+                  />
+                  <strong>Почта:</strong>
+                  <input
+                    className="form-control editForms"
+                    type="tel"
+                    id="email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                  />
+                  <strong>Разрешения:</strong>
+                  <input
+                    className="form-control editForms"
+                    type="tel"
+                    id="permissions"
+                    value={permissions}
+                    onChange={(e) => setPermissions(e.target.value)}
+                  />
+
+                  <div className="modal-actions">
+                    <br />
+                    <button
+                      className="btn btn-success editSaveBtn"
+                      onClick={handleEditUser}
+                      data-bs-dismiss="modal"
+                    >
+                      Сохранить
+                    </button>
                   </div>
                 </div>
               </div>

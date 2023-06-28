@@ -12,7 +12,6 @@ const App = ({ users }) => {
   );
 };
 const mapStateToProps = (state) => {
-  console.log("app state", state);
   return {
     users: state.users,
   };
