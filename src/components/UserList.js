@@ -60,7 +60,18 @@ const UserList = ({ users }) => {
     dispatch(updateUser(updatedUser));
   };
 
-  function toggleSidebar() {
+  function toggleOpenSidebar() {
+    const sidebar = document.getElementById("sidebar");
+    if (sidebar !== null) {
+      if (sidebar.style.display === "none") {
+        sidebar.style.display = "block";
+      } else {
+        sidebar.style.display = "none";
+      }
+    }
+  }
+
+  function toggleCloseSidebar() {
     const sidebar = document.getElementById("sidebar");
     if (sidebar !== null) {
       if (sidebar.style.display === "none") {
@@ -75,6 +86,13 @@ const UserList = ({ users }) => {
       <div id="sidebar" className="sidebar">
         <ul className="menu">
           <li>
+            <img
+              id="toggleMenuIcon"
+              className="toggleCloseIcon"
+              src={process.env.PUBLIC_URL + "/menu2.png"}
+              alt="Иконка"
+              onClick={toggleCloseSidebar}
+            />
             <img
               className="site-icon"
               src={process.env.PUBLIC_URL + "/icons/11.png"}
@@ -193,10 +211,10 @@ const UserList = ({ users }) => {
           <div className="mobileHeader">
             <img
               id="toggleMenuIcon"
-              className="toggleMenuIcon"
+              className="toggleOpenIcon"
               src={process.env.PUBLIC_URL + "/menu2.png"}
               alt="Иконка"
-              onClick={toggleSidebar}
+              onClick={toggleOpenSidebar}
             />
             <h1 className="title">Команда</h1>
           </div>

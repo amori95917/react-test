@@ -54,9 +54,14 @@
     margin: 0.5em 0 !important;
   }
 
-  .toggleMenuIcon {
+  .toggleOpenIcon {
     cursor: pointer;
-    z-index: 2;
+  }
+
+  .toggleCloseIcon {
+    display: flex;
+    justify-content: left;
+    cursor: pointer;
   }
 
   .menu-list {
@@ -87,11 +92,16 @@
   .btn-close {
     max-width: 10px !important;
   }
+
+  .site-icon {
+    display: none !important;
+  }
 }
 
 @media (min-width: 770px) {
-  .toggleMenuIcon {
-    display: none;
+  .toggleCloseIcon,
+  .toggleOpenIcon {
+    display: none !important;
   }
   .sidebar {
     display: block;
@@ -165,13 +175,20 @@
   height: 34px;
 }
 
-.toggleMenuIcon {
+.toggleOpenIcon {
   position: relative;
   margin-right: 10%;
   margin-left: 3em;
   width: 25px;
   height: 25px;
 }
+
+.toggleCloseIcon {
+  margin-top: 1em;
+  width: 25px;
+  height: 25px;
+}
+
 .menu-icon {
   width: 25px;
   height: 25px;
